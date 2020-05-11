@@ -29,7 +29,12 @@ from setuptools import setup, find_packages
 
 LIBRARY_NAME = 'DynamoDBSQLLibrary'
 CWD = abspath(dirname(__file__))
-execfile(join(CWD, 'src', LIBRARY_NAME, 'version.py'))
+filename = join(CWD, 'src', LIBRARY_NAME, 'version.py')
+
+with open(filename, "rb") as source_file:
+    code = compile(source_file.read(), filename, "exec")
+
+exec(code)
 
 with codecs.open(join(CWD, 'README.rst'), encoding='utf-8') as reader:
     LONG_DESCRIPTION = reader.read()
